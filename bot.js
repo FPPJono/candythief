@@ -85,7 +85,7 @@ async function scorecard(person, message, bot) {
         var fnt = PImage.registerFont('scorefont.ttf', 'Score Font')
         fnt.load(() => {
             ctx.fillStyle = '#000000';
-            ctx.font = `12pt 'Score Font'`;
+            ctx.font = `18pt 'Score Font'`;
             ctx.fillText(`Detective:`, 394, 400);
             ctx.font = `${size}pt 'Score Font'`;
             ctx.fillText(`${person.username}`, 394, 450);
