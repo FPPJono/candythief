@@ -75,11 +75,11 @@ async function scorecard(person, message) {
         size = 50
     }
     PImage.decodePNGFromStream(fs.createReadStream(`scorecards/welcomeCard.png`)).then((img) => {
-        var img2 = PImage.make(736,466);
+        var img2 = PImage.make(750,500);
         var c = img2.getContext('2d');
         c.drawImage(img,
             0, 0, img.width, img.height, // source dimensions
-            0, 0, 736, 466              // destination dimensions
+            0, 0, 750, 500              // destination dimensions
         );
         var ctx = c
         var fnt = PImage.registerFont('scorefont.ttf', 'Score Font')
