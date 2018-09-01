@@ -96,7 +96,7 @@ async function scorecard(person, message, bot) {
                )
                 PImage.encodePNGToStream(img2,fs.createWriteStream('score.png')).then(() => {
                     message.author.send({files:[{attachment: 'score.png', name:'winner.png'}] })
-                    bot.guilds.get('484293337323667467').channels.get('485205101913571329').send(`<@${message.author.id}> has won! their time was:${message.createdTimestamp - bot.guilds.get('484293337323667467').member(person).joinedTimestamp}`)
+                    bot.guilds.get('484293337323667467').channels.get('485205101913571329').send(`<@${message.author.id}> has won! their time was:${(message.createdTimestamp - bot.guilds.get('484293337323667467').member(person).joinedTimestamp).toString().slice(0,-3)}`)
                 });
             })
         });
