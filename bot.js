@@ -85,12 +85,14 @@ async function scorecard(person, message, bot) {
         var fnt = PImage.registerFont('scorefont.ttf', 'Score Font')
         fnt.load(() => {
             ctx.fillStyle = '#000000';
+            ctx.font = `12pt 'Score Font'`;
+            ctx.fillText(`Detective:`, 394, 400);
             ctx.font = `${size}pt 'Score Font'`;
-            ctx.fillText(`${person.username}`, 394, 123);
+            ctx.fillText(`${person.username}`, 394, 450);
             PImage.decodePNGFromStream(fs.createReadStream(`pfp.png`)).then((pfp) => {
                 c.drawImage(pfp,
                     0, 0, pfp.width, pfp.height,
-                    519, 68, 100, 100
+                    515, 65, 100, 110
                )
                 PImage.encodePNGToStream(img2,fs.createWriteStream('score.png')).then(() => {
                     message.author.send({files:[{attachment: 'score.png', name:'winner.png'}] })
