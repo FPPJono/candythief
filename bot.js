@@ -86,15 +86,15 @@ async function scorecard(person, message, bot) {
         fnt.load(() => {
             ctx.fillStyle = '#000000';
             ctx.font = `24pt 'Score Font'`;
-            ctx.fillText(`Detective:`, 367, 342);
+            ctx.fillText(`Detective:`, 383, 364);
             ctx.font = `24pt 'Score Font'`;
-            ctx.fillText(`Time Taken: ${(message.createdTimestamp - bot.guilds.get('484293337323667467').member(person).joinedTimestamp).toString().slice(0,-3)} seconds`, 394, 470);
+            ctx.fillText(`Time Taken: ${(message.createdTimestamp - bot.guilds.get('484293337323667467').member(person).joinedTimestamp).toString().slice(0,-3)} seconds`, 397, 448);
             ctx.font = `${size}pt 'Score Font'`;
-            ctx.fillText(`${person.username}`, 376, 383);
+            ctx.fillText(`${person.username}`, 393, 407);
             PImage.decodePNGFromStream(fs.createReadStream(`pfp.png`)).then((pfp) => {
                 c.drawImage(pfp,
                     0, 0, pfp.width, pfp.height,
-                    513, 65, 105, 110
+                    517, 67, 100, 100
                )
                 PImage.encodePNGToStream(img2,fs.createWriteStream('score.png')).then(() => {
                     message.author.send({files:[{attachment: 'score.png', name:'winner.png'}] })
