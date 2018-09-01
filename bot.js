@@ -70,7 +70,7 @@ async function scorecard(person, message) {
             frameData[0].getImage().pipe(fs.createWriteStream(`scorecards/pfp.png`))
         })
     }
-    var size = (600 / name.length)
+    var size = (600 / person.username.length)
     if (size > 50){
         size = 50
     }
@@ -86,7 +86,7 @@ async function scorecard(person, message) {
         fnt.load(() => {
             ctx.fillStyle = '#000000';
             ctx.font = `${size}pt 'Score Font'`;
-            ctx.fillText(`test`, 135, 80);
+            ctx.fillText(`${person.username}`, 135, 80);
             ctx.font = "35pt 'Score Font'"
             ctx.fillText("this", 14, 221)
             ctx.fillText("currently", 14, 292)
