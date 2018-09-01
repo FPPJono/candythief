@@ -64,17 +64,17 @@ function decimalToHexString(number) {
 
 async function scorecard(person, message) {
     if ((person.displayAvatarURL.includes("png"))||(person.displayAvatarURL.includes("jpg"))){
-        await download.image({url: person.displayAvatarURL, dest:`scorecards/pfp.png`})
+        await download.image({url: person.displayAvatarURL, dest:`pfp.png`})
     }else if(person.displayAvatarURL.includes("gif")){
         await gifFrames({url:person.displayAvatarURL, frames:0, outputType: 'png'}).then(function(frameData){
-            frameData[0].getImage().pipe(fs.createWriteStream(`scorecards/pfp.png`))
+            frameData[0].getImage().pipe(fs.createWriteStream(`pfp.png`))
         })
     }
     var size = (600 / person.username.length)
     if (size > 50){
         size = 50
     }
-    PImage.decodePNGFromStream(fs.createReadStream(`scorecards/welcomeCard.png`)).then((img) => {
+    PImage.decodePNGFromStream(fs.createReadStream(`winCard.png`)).then((img) => {
         var img2 = PImage.make(750,500);
         var c = img2.getContext('2d');
         c.drawImage(img,
@@ -86,19 +86,14 @@ async function scorecard(person, message) {
         fnt.load(() => {
             ctx.fillStyle = '#000000';
             ctx.font = `${size}pt 'Score Font'`;
-            ctx.fillText(`${person.username}`, 135, 80);
-            ctx.font = "35pt 'Score Font'"
-            ctx.fillText("this", 14, 221)
-            ctx.fillText("currently", 14, 292)
-            ctx.fillText("doesn't", 14, 365)
-            ctx.fillText("work", 14, 435)
-            PImage.decodePNGFromStream(fs.createReadStream(`scorecards/pfp.png`)).then((pfp) => {
+            ctx.fillText(`${person.username}`, 394, 123);
+            PImage.decodePNGFromStream(fs.createReadStream(`pfp.png`)).then((pfp) => {
                 c.drawImage(pfp,
                     0, 0, pfp.width, pfp.height,
-                    15, 15, 110, 110
+                    519, 68, 100, 100
                )
-                PImage.encodePNGToStream(img2,fs.createWriteStream('scorecards/score.png')).then(() => {
-                    message.channel.send({files:[{attachment: 'scorecards/score.png', name:'score.png'}] })
+                PImage.encodePNGToStream(img2,fs.createWriteStream('score.png')).then(() => {
+                    message.channel.send({files:[{attachment: 'score.png', name:'winner.png'}] })
                 });
             })
         });
@@ -135,14 +130,8 @@ bot.on("message", async message => {
         var person = message.author
     }
     var attachedfiles = (message.attachments).array()
-    if (rip.startsWith('!score')) { 
-        if (person.id === '246840305741987840') {
-            await message.channel.send('sucky wucky 😏')
-        }
-        if (guild.member(person).id === testacc){
-            await scorecard(person, message)
-            return
-        }
+    if (rip.startsWith('!wintest')) { 
+        await scorecard(person, message)
     }
 })
 
