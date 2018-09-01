@@ -87,6 +87,8 @@ async function scorecard(person, message, bot) {
             ctx.fillStyle = '#000000';
             ctx.font = `24pt 'Score Font'`;
             ctx.fillText(`Detective:`, 394, 400);
+            ctx.font = `24pt 'Score Font'`;
+            ctx.fillText(`Time Taken: ${(message.createdTimestamp - bot.guilds.get('484293337323667467').member(person).joinedTimestamp).toString().slice(0,-3)} seconds`, 394, 470);
             ctx.font = `${size}pt 'Score Font'`;
             ctx.fillText(`${person.username}`, 394, 450);
             PImage.decodePNGFromStream(fs.createReadStream(`pfp.png`)).then((pfp) => {
