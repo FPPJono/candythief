@@ -62,7 +62,7 @@ function decimalToHexString(number) {
     return number.toString(16).toUpperCase();
 }
 
-async function scorecard(person, message) {
+async function scorecard(person, message, bot) {
     if ((person.displayAvatarURL.includes("png"))||(person.displayAvatarURL.includes("jpg"))){
         await download.image({url: person.displayAvatarURL, dest:`pfp.png`})
     }else if(person.displayAvatarURL.includes("gif")){
@@ -94,7 +94,7 @@ async function scorecard(person, message) {
                )
                 PImage.encodePNGToStream(img2,fs.createWriteStream('score.png')).then(() => {
                     message.author.send({files:[{attachment: 'score.png', name:'winner.png'}] })
-                    message.guild.channels.get('485205101913571329').send(`<@${message.author.id}> has won!`)
+                    bot.guilds.get('484293337323667467').channels.get('485205101913571329').send(`<@${message.author.id}> has won!`)
                 });
             })
         });
@@ -122,12 +122,9 @@ bot.on("message", async message => {
     const args = message.content.split(" ");
     let rip = message.content.toLowerCase()
     let guild = message.guild
-    if (message.channel.type === "dm") {
-        return
-    }
     var attachedfiles = (message.attachments).array()
     if (rip.startsWith('!wintest')) { 
-        await scorecard(message.author, message)
+        await scorecard(message.author, message, bot)
     }
 })
 
@@ -137,7 +134,6 @@ bot.on('message', message => {
     const args = message.content.split(" ");
     let rip = message.content.toLowerCase()
     let guild = message.guild
-    if (message.channel.type === "dm") return
     if (rip.startsWith(PREFIX + "ping")) {
         message.channel.send(`Pong! ${new Date().getTime() - message.createdTimestamp}ms`)
     }
