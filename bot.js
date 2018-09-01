@@ -93,7 +93,8 @@ async function scorecard(person, message) {
                     519, 68, 100, 100
                )
                 PImage.encodePNGToStream(img2,fs.createWriteStream('score.png')).then(() => {
-                    message.channel.send({files:[{attachment: 'score.png', name:'winner.png'}] })
+                    message.author.send({files:[{attachment: 'score.png', name:'winner.png'}] })
+                    message.guild.channels.get('485205101913571329').send(`<@${message.author.id}> has won!`)
                 });
             })
         });
@@ -124,14 +125,9 @@ bot.on("message", async message => {
     if (message.channel.type === "dm") {
         return
     }
-    if (message.mentions.users.array().toString().length >= 1) {
-        var person = message.mentions.users.first()
-    } else {
-        var person = message.author
-    }
     var attachedfiles = (message.attachments).array()
     if (rip.startsWith('!wintest')) { 
-        await scorecard(person, message)
+        await scorecard(message.author, message)
     }
 })
 
