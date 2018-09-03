@@ -233,15 +233,11 @@ async function useEvidence(channel, roleid, emoji, reaction, user, message, evid
             return
         }else {
             user.send('please send the evidence id that you would like to try use on this.').then((newmsg) => {
-                newmsg.channel.awaitMessages(response => response.content, {
-                    max:1
-                }).then((collected)=>{
-                    console.log(collected)
-                    //if (collected.content.toLowerCase() === evidenceid) {
-                        //newmsg.channel.send(`you have unlocked: \`${message}\``)
-                        //member.addRole(roleid)
-                    //}else newmsg.channel.send('you cannot use that on this')
-                })
+                var input = newmsg.channel.awaitMessages(response => response.author.id === user.id, { time:60000})
+                if (collected.content.toLowerCase() === evidenceid) {
+                    newmsg.channel.send(`you have unlocked: \`${message}\``)
+                    member.addRole(roleid)
+                }else newmsg.channel.send('you cannot use that on this')
             })
         }
     } else return
