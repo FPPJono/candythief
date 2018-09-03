@@ -194,9 +194,9 @@ bot.on('message', message => {
         s = s.replace(/[abcdefghijklmnopqrstuvwxyz ]/g, m => chars[m]);
         message.channel.send(`${s}`)
     }
-    if (message.content.startsWith(PREFIX + "cm192")) {
+    if (message.content.startsWith(PREFIX + "pc823")) {
         let color = getRandomInt(16777215)
-        var embed = richEmbed(color, ["Found In", "Evidence ID", "Suspects Present", "Hidden Data", "Information"], [`<#484294432204521472>`,`cm_192`,`<#484532310881075201>`,`None`,`Image of Nakpin found in the attic, confirming that they were in the attic at the time of the crime`], `Info About The Evidence Above`)
+        var embed = richEmbed(color, ["Found In", "Evidence ID", "Suspects Present", "Hidden Data", "Information"], [`<#484294432204521472>`,`pc_823`,`<#484532378572816394>, <#484532686032076802>`,`Conversation audio`,`Audio tape of a conversation between poot and cate, conversation is below`], `Info About The Evidence Above`)
         message.channel.send({ embed });
     }
 });
