@@ -20,11 +20,16 @@ var tmp = require('tmp')
 
 //Bot Code
 
+//rooms
+var attic = '484294432204521472'
+var bedroom = '484294343021297677'
+var bathroom = '484294365234331658'
+var kitchen = '484294384423010305'
+var livingroom = '484294411274944513'
+var basement = '484293337323667469'
+
 //me
 const testacc = '270017125815418901'
-
-
-//Song Roles
 
 //functions
 function getRandomInt(max) {
@@ -199,6 +204,24 @@ bot.on('message', message => {
         var embed = richEmbed(color, ["Found In", "Evidence ID", "Suspects Present", "Hidden Data", "Information"], [`<#484294432204521472>`,`pc_823`,`<#484532378572816394>, <#484532686032076802>`,`Conversation audio`,`Audio tape of a conversation between poot and cate, conversation is below`], `Info About The Evidence Above`)
         message.channel.send({ embed });
     }
+});
+
+function findEvidence(channel, roleid, emoji, reaction, user, found) {
+    if (reaction.emoji.name === emoji) {
+        if (user.bot) return;
+        let guild = reaction.message.guild;
+        let member = guild.member(user);
+        if (reaction.message.channel != bot.channels.get(channel)) {
+            return;
+        }
+        user.send(`You have found: \`${found}\``)
+        member.addRole(roleid)
+    }
+}
+
+bot.on('messageReactionAdd', async (reaction, user) => {
+    findEvidence(attic, '486089032388837387', "🔍", reaction, user, "a tape recorder and a polaroid photo")
+
 });
 
 // Sneaky Sneaky Token. Dont Share Kiddos
