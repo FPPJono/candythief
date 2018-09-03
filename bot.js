@@ -214,8 +214,12 @@ function findEvidence(channel, roleid, emoji, reaction, user, found) {
         if (reaction.message.channel != bot.channels.get(channel)) {
             return;
         }
-        user.send(`You have found: \`${found}\``)
-        member.addRole(roleid)
+        if (member.roles.has(roleid)) {
+            return
+        } else {
+            user.send(`You have found: \`${found}\``)
+            member.addRole(roleid)
+        }
     }
 }
 
