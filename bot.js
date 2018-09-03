@@ -235,7 +235,7 @@ async function useEvidence(channel, roleid, emoji, reaction, user, message, evid
             user.send('please send the evidence id that you would like to try use on this.').then(async function(newmsg){
                 var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, { time:60000})
                 console.log(input)
-                if (input[0].content.toLowerCase() === evidenceid) {
+                if (input.first().content.toLowerCase() === evidenceid) {
                     newmsg.channel.send(`you have unlocked: \`${message}\``)
                     member.addRole(roleid)
                 }else newmsg.channel.send('you cannot use that on this')
