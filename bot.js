@@ -233,7 +233,7 @@ async function useEvidence(channel, roleid, emoji, reaction, user, message, evid
             return
         }else {
             user.send('please send the evidence id that you would like to try use on this.').then(async function(newmsg){
-                var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, { time:60000})
+                var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, { time:6000})
                 console.log(input)
                 if (input.first().content.toLowerCase() === evidenceid) {
                     newmsg.channel.send(`you have unlocked: \`${message}\``)
@@ -247,7 +247,7 @@ async function useEvidence(channel, roleid, emoji, reaction, user, message, evid
 bot.on('messageReactionAdd', async (reaction, user) => {
     console.log(reaction.emoji.name)
     findEvidence(attic, '486089032388837387', "🔍", reaction, user, "a tape recorder and a polaroid photo")
-    useEvidence('485285840088727552', '486096751204499468', "inv", reaction, user, "sex", "cm_192")
+    useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
 
 });
 
