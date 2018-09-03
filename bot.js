@@ -162,7 +162,7 @@ bot.on('message', message => {
         var embed = basicEmbed(16776448, `${coinFlip[Math.floor(Math.random() * coinFlip.length).toString(16)]}`)
         message.channel.send({ embed });
     }
-    if (rip.startsWith(PREFIX + "userinfo")) {
+    if (message.content.startsWith(PREFIX + "userinfo")) {
         let guild = message.guild;
         if (message.mentions.users.array().toString().length >= 1) {
             var person = message.mentions.users.first()
@@ -170,38 +170,7 @@ bot.on('message', message => {
             var person = message.author
         }
         let color = message.guild.member(person).displayColor
-        const embed = {
-            "color": color,
-            "thumbnail": {
-                "url": `${person.avatarURL}`
-            },
-            "author": {
-                "name": `${person.username}`,
-                "icon_url": `${person.avatarURL}`
-            },
-            "fields": [
-                {
-                    "name": "Display name",
-                    "value": `${message.guild.member(person).displayName}`
-                },
-                {
-                    "name": "User ID",
-                    "value": `${person.id}`
-                },
-                {
-                    "name": "Roles",
-                    "value": `${message.guild.member(person).roles.array().toString().substr(0, 1024)}`
-                },
-                {
-                    "name": "Top Role Color",
-                    "value": `${message.guild.member(person).displayHexColor}`
-                },
-                {
-                    "name": "Joined",
-                    "value": `${message.guild.member(person).joinedAt.toUTCString()}`
-                }
-            ]
-        };
+        var embed = pfpEmbed(color, ["Display Name", "User ID", "Roles", "Top Role Colour", "Joined"], [`${message.guild.member(person).displayName}`,`${person.id}`,`${message.guild.member(person).roles.array().toString().substr(0, 1024)}`,`${message.guild.member(person).displayHexColor}`,`${message.guild.member(person).joinedAt.toUTCString()}`], `Info About ${person.username}`, `${person.avatarURL}`)
         message.channel.send({ embed });
     }
     if (rip.startsWith(PREFIX + "avatar")) {
@@ -224,6 +193,11 @@ bot.on('message', message => {
         var s = rip.substr(7);
         s = s.replace(/[abcdefghijklmnopqrstuvwxyz ]/g, m => chars[m]);
         message.channel.send(`${s}`)
+    }
+    if (message.content.startsWith(PREFIX + "cm192")) {
+        let color = getRandomInt(16777215)
+        var embed = richEmbed(color, ["Found In", "Evidence ID", "Suspects Present", "Hidden Data", "Information"], [`<#484294432204521472>`,`cm_192`,`<#484532310881075201>`,`None`,`Image of Nakpin found in the attic, confirming that they were in the attic at the time of the crime`], `Info About The Evidence Above`)
+        message.channel.send({ embed });
     }
 });
 
