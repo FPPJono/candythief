@@ -223,8 +223,33 @@ function findEvidence(channel, roleid, emoji, reaction, user, found) {
     }
 }
 
+async function useEvidence(channel, roleid, emoji, reaction, user, message, evidenceid) {
+    if (reaction.emoji.name === emoji) {
+        if (user.bot) return
+        let guild = reaction.message.guild
+        let member = guild.member(user)
+        if (reaction.message.channel != bot.channels.get(channel)) return
+        if (member.roles.has(roleid)) {
+            return
+        }else {
+            user.send('please send the evidence id that you would like to try use on this.').then((newmsg) => {
+                newmsg.channel.awaitMessages(response => response.content, {
+                    max:1, time:5000, errors:['time'],
+                }).then((collected)=>{
+                    if (collected === evidenceid) {
+                        newmsg.channel.send(`you have unlocked: \`${message}\``)
+                        member.addRole(roleid)
+                    }else newmsg.channel.send('you cannot use that on this')
+                })
+            })
+        }
+    } else return
+}
+
 bot.on('messageReactionAdd', async (reaction, user) => {
+    console.log(reaction.emoji.name)
     findEvidence(attic, '486089032388837387', "🔍", reaction, user, "a tape recorder and a polaroid photo")
+    useEvidence('485285840088727552', '486096751204499468', "🔍", reaction, user, "sex", "cm_192")
 
 });
 
