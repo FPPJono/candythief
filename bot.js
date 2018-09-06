@@ -273,7 +273,7 @@ async function useEvidence(channel, roleid, emoji, reaction, user, message, evid
 bot.on('messageReactionAdd', async (reaction, user) => {
     console.log(reaction.emoji.name)
     findEvidence(attic, '486089032388837387', "🔍", reaction, user, "a tape recorder and a polaroid photo")
-    //useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
+    useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
 
 });
 
