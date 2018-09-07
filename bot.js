@@ -282,7 +282,7 @@ async function accuse(emoji, reaction, user) {
             var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
             var roomCheck = roomvalue.first().content
             room.channel.send(roomCheck)
-            while (rooms.includes(roomCheck.toLowerCase()) != true) { 
+            while (roomids.includes(roomCheck.toLowerCase()) != true) { 
                 room.channel.send('`that is not a valid response, please input a valid room id`')
                 roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                 roomCheck = roomvalue.first().content
