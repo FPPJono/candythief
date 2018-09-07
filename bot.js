@@ -270,11 +270,28 @@ async function useEvidence(channel, roleid, emoji, reaction, user, message, evid
     } else return
 }
 
+async function accuse(emoji, reaction, user) {
+    if (reaction.emoji.name === emoji) {
+        if (user.bot) return
+        let guild = reaction.message.guild
+        let member = guild.member(user)
+        var rooms = ['attic','bedroom','bathroom','kitchen','living room','basement']
+        user.send(`you are accusing ${guild.channels.get(reaction.message.guild.channel).name}`).then(async function(room){
+            var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+            while (roomvalue.includes(roomvalue.toLowerCase()) != true) { 
+                room.channel.send('that is not a valid response, please input the room name')
+                var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+            }
+            room.channel.send('wee')
+        })
+    } else return
+}
+
 bot.on('messageReactionAdd', async (reaction, user) => {
     console.log(reaction.emoji.name)
     findEvidence(attic, '486089032388837387', "🔍", reaction, user, "a tape recorder and a polaroid photo")
-    useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
-
+    //useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
+    accuse("🔨", reaction, user)
 });
 
 // Sneaky Sneaky Token. Dont Share Kiddos
