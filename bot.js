@@ -277,8 +277,8 @@ async function accuse(emoji, reaction, user) {
         let member = guild.member(user)
         var rooms = ['Attic','Bedroom','Bathroom','Kitchen','Living Room','Basement']
         var roomids=['atc','bdr','btr','ktc','lvr','bsm']
-        var evidence = ['conversation between poot and cate','polaroid of nakpin']
-        var evids = ['pc_823','cm_192']
+        var evidence = ['conversation between poot and cate','polaroid of nakpin','boombox screw']
+        var evids = ['pc_823','cm_192','bm_428']
         var chosenEvidence = []
         var accused = guild.channels.get(reaction.message.channel.id).name
         chosenEvidence.push(accused)
