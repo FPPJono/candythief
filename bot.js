@@ -280,9 +280,9 @@ async function accuse(emoji, reaction, user) {
             var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
             while (rooms.includes(roomvalue.toString().toLowerCase()) != true) { 
                 room.channel.send('`that is not a valid response, please input the correct room id`')
-                var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
             }
-            room.channel.send('wee')
+            room.channel.send(`you have chosen the \`${roomvalue}\` as the room that the event took place`)
         })
     } else return
 }
