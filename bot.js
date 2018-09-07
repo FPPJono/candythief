@@ -287,7 +287,7 @@ async function accuse(emoji, reaction, user) {
                 roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                 roomCheck = roomvalue.first().content
             }
-            var chosenRoom = roomids[rooms.indexOf(roomCheck.toLowerCase())]
+            var chosenRoom = rooms[roomids.indexOf(roomCheck.toLowerCase())]
             room.channel.send(`you have chosen the \`${chosenRoom}\` as the room that the event took place`)
         })
     } else return
