@@ -275,14 +275,17 @@ async function accuse(emoji, reaction, user) {
         if (user.bot) return
         let guild = reaction.message.guild
         let member = guild.member(user)
-        var rooms = ['attic','bedroom','bathroom','kitchen','living room','basement']
-        user.send(`you are accusing ${guild.channels.get(reaction.message.channel.id).name} of stealing the candy\nplease send the room id that you think they stole it from`).then(async function(room){
+        var rooms = ['Attic','Bedroom','Bathroom','Kitchen','Living Room','Basement']
+        var roomids=['atc','bdr','btr','ktc','lvr','bsm']
+        var accused = guild.channels.get(reaction.message.channel.id).name
+        user.send(`you are accusing ${accused} of stealing the candy\nplease send the id of the room that you think they stole it from`).then(async function(room){
             var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
             while (rooms.includes(roomvalue.content.toLowerCase()) != true) { 
-                room.channel.send('`that is not a valid response, please input the correct room id`')
+                room.channel.send('`that is not a valid response, please input a valid room id`')
                 roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
             }
-            room.channel.send(`you have chosen the \`${roomvalue.content}\` as the room that the event took place`)
+            var chosenRoom = roomids[rooms.indexOf(roomvalue.content.toLowerCase())]
+            room.channel.send(`you have chosen the \`${chosenRoom}\` as the room that the event took place`)
         })
     } else return
 }
