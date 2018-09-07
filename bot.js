@@ -102,7 +102,7 @@ async function scorecard(person, message, bot) {
                     517, 67, 100, 100
                )
                 PImage.encodePNGToStream(img2,fs.createWriteStream('score.png')).then(() => {
-                    message.author.send({files:[{attachment: 'score.png', name:'winner.png'}] })
+                    person.send({files:[{attachment: 'score.png', name:'winner.png'}] })
                     bot.guilds.get('484293337323667467').channels.get('485205101913571329').send(`<@${message.author.id}> has won! their time was: ${(message.createdTimestamp - bot.guilds.get('484293337323667467').member(person).joinedTimestamp).toString().slice(0,-3)} seconds`)
                 });
             })
@@ -277,8 +277,8 @@ async function accuse(emoji, reaction, user) {
         let member = guild.member(user)
         var rooms = ['Attic','Bedroom','Bathroom','Kitchen','Living Room','Basement']
         var roomids=['atc','bdr','btr','ktc','lvr','bsm']
-        var evidence = ['conversation between poot and cate','polaroid of nakpin','boombox screw']
-        var evids = ['pc_823','cm_192','bm_428']
+        var evidence = ['conversation between poot and cate','polaroid of nakpin','boombox screw','muddy shoe print']
+        var evids = ['pc_823','cm_192','bm_428','ss_729']
         var chosenEvidence = []
         var accused = guild.channels.get(reaction.message.channel.id).name
         chosenEvidence.push(accused)
@@ -323,6 +323,17 @@ async function accuse(emoji, reaction, user) {
                         chosenEvidence.push(evidence[evids.indexOf(ev3Check.toLowerCase())])
                         room.channel.send(chosenEvidence)
                         room.channel.send(`you have chosen:\`${chosenEvidence[4]}\` as your third piece of evidence`)
+                        if (chosenEvidence.includes("chris") != true) {
+                            return room.channel.send("`you have gotten at least one thing incorrect`")
+                        }else if (chosenEvidence.includes("Living Room") != true) {
+                            return room.channel.send("`you have gotten at least one thing incorrect`")
+                        } else if (chosenEvidence.includes("muddy shoe print") != true) {
+                            return room.channel.send("`you have gotten at least one thing incorrect`")
+                        }else if (chosenEvidence.includes("polaroid of nakpin") != true) {
+                            return room.channel.send("`you have gotten at least one thing incorrect`")
+                        }else if (chosenEvidence.includes("boombox screw") != true) {
+                            return room.channel.send("`you have gotten at least one thing incorrect`")
+                        }else scorecard(answer3.first().author, answer3.first(), bot)
                     })
                 })
             })
