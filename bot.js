@@ -226,9 +226,9 @@ bot.on('message', message => {
         s = s.replace(/[abcdefghijklmnopqrstuvwxyz ]/g, m => chars[m]);
         message.channel.send(`${s}`)
     }
-    if (message.content.startsWith(PREFIX + "pc823")) {
+    if (message.content.startsWith(PREFIX + "tools")) {
         let color = getRandomInt(16777215)
-        var embed = richEmbed(color, ["Found In", "Evidence ID", "Suspects Present", "Hidden Data", "Information"], [`<#484294432204521472>`,`pc_823`,`<#484532378572816394>, <#484532686032076802>`,`Conversation audio`,`Audio tape of a conversation between poot and cate, conversation is below`], `Info About The Evidence Above`)
+        var embed = richEmbed(color, ["🔍", "❓", "<:inv:486093327662448650>", "🔨"], [`Looks through the room and adds anything that gets found to your evidence archive`,`Stuck? Call in Detective Spark to help pick up some extra clues (Can only be used twice)`,`think you can use some evidence you have to solve something? press this and then dm the evidence id to the bot, and if you can, you will!`,`think you've solved the mystery? go to the suspect profile for the person youre accusing and press this, then answer the questions sent by the bot and see if youre right!`], `Tools`)
         message.channel.send({ embed });
     }
 });
