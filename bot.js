@@ -295,8 +295,8 @@ async function accuse(emoji, reaction, user) {
             user.send(`please present the id of your first piece of evidence`).then(async function(){
                 var answer1 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                 var ev1Check = answer1.first().content
-                while (evids.includes(ev1Check.toLowerCase()) != true) { 
-                    answer.channel.send('`that is not a valid response, please input a valid room id`')
+                while ((evids.includes(ev1Check.toLowerCase()) != true)||(chosenEvidence.includes(ev1Check.toLowerCase()) === true)) { 
+                    answer.channel.send('`that is either an invalid response or you have used this already, please input a valid room id`')
                     answer1 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                     ev1Check = answer1.first().content
                 }
@@ -305,13 +305,24 @@ async function accuse(emoji, reaction, user) {
                 room.channel.send(`please present the id of your second piece of evidence`).then(async function(){
                     var answer2 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                     var ev2Check = answer2.first().content
-                    while (evids.includes(ev2Check.toLowerCase()) != true) { 
-                        room.channel.send('`that is not a valid response, please input a valid room id`')
+                    while ((evids.includes(ev2Check.toLowerCase()) != true)||(chosenEvidence.includes(ev2Check.toLowerCase()) === true)) { 
+                        room.channel.send('`that is either an invalid response or you have used this already, please input a valid room id`')
                         answer2 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                         ev2Check = answer2.first().content
                     }
-                    chosenEvidence.push(evidence[evids.indexOf(ev1Check.toLowerCase())])
+                    chosenEvidence.push(evidence[evids.indexOf(ev2Check.toLowerCase())])
                     room.channel.send(`you have chosen:\`${chosenEvidence[3]}\` as your second piece of evidence`)
+                    room.channel.send(`please present the id of your third piece of evidence`).then(async function(){
+                        var answer3 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                        var ev3Check = answer3.first().content
+                        while ((evids.includes(ev3Check.toLowerCase()) != true)||(chosenEvidence.includes(ev3Check.toLowerCase()) === true)) { 
+                            room.channel.send('`that is either an invalid response or you have used this already, please input a valid room id`')
+                            answer3 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                            ev3Check = answer3.first().content
+                        }
+                        chosenEvidence.push(evidence[evids.indexOf(ev3Check.toLowerCase())])
+                        room.channel.send(`you have chosen:\`${chosenEvidence[4]}\` as your second piece of evidence`)
+                    })
                 })
             })
         })
