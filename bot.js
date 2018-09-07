@@ -300,7 +300,7 @@ async function accuse(emoji, reaction, user) {
                     answer1 = await answer.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                     ev1Check = answer1.first().content
                 }
-                chosenEvidence.push(rooms[roomids.indexOf(roomCheck.toLowerCase())])
+                chosenEvidence.push(evidence[evids.indexOf(ev1Check.toLowerCase())])
                 room.channel.send(`you have chosen:\`${chosenEvidence[2]}\` as your first piece of evidence`)
             })
         })
