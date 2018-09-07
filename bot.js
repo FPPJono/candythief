@@ -280,6 +280,7 @@ async function accuse(emoji, reaction, user) {
         var accused = guild.channels.get(reaction.message.channel.id).name
         user.send(`you are accusing ${accused} of stealing the candy\nplease send the id of the room that you think they stole it from`).then(async function(room){
             var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+            room.channel.send(roomvalue.content)
             while (rooms.includes(roomvalue.content.toLowerCase()) != true) { 
                 room.channel.send('`that is not a valid response, please input a valid room id`')
                 roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
