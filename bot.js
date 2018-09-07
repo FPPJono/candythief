@@ -292,17 +292,16 @@ async function accuse(emoji, reaction, user) {
             }
             chosenEvidence.push(rooms[roomids.indexOf(roomCheck.toLowerCase())])
             room.channel.send(`you have chosen the \`${chosenEvidence[1]}\` as the room that the event took place`)
-            user.send(`please present the id of your first piece of evidence`).then(async function(answer){
-                var answer1 = await answer.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
-                var ev1Check = answer1.first().content
-                while (evids.includes(ev1Check.toLowerCase()) != true) { 
-                    answer.channel.send('`that is not a valid response, please input a valid room id`')
-                    answer1 = await answer.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
-                    ev1Check = answer1.first().content
-                }
-                chosenEvidence.push(evidence[evids.indexOf(ev1Check.toLowerCase())])
-                room.channel.send(`you have chosen:\`${chosenEvidence[2]}\` as your first piece of evidence`)
-            })
+            room.channel.send(`please present the id of your first piece of evidence`)
+            var answer1 = await answer.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+            var ev1Check = answer1.first().content
+            while (evids.includes(ev1Check.toLowerCase()) != true) { 
+                room.channel.send('`that is not a valid response, please input a valid evidence id`')
+                answer1 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                ev1Check = answer1.first().content
+            }
+            chosenEvidence.push(evidence[evids.indexOf(ev1Check.toLowerCase())])
+            room.channel.send(`you have chosen:\`${chosenEvidence[2]}\` as your first piece of evidence`)
         })
     } else return
 }
