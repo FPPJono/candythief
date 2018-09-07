@@ -115,27 +115,16 @@ const events = {
     MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
 };
 bot.on('raw', async event => {
-    // `event.t` is the raw event name
     if (!events.hasOwnProperty(event.t)) return;
-
     const { d: data } = event;
     const user = bot.users.get(data.user_id);
     const channel = bot.channels.get(data.channel_id) || await user.createDM();
-
-    // if the message is already in the cache, don't re-emit the event
     if (channel.messages.has(data.message_id)) return;
-
-    // if you're on the master/v12 branch, use `channel.messages.fetch()`
     const message = await channel.fetchMessage(data.message_id);
-
-    // custom emojis reactions are keyed in a `name:ID` format, while unicode emojis are keyed by names
-    // if you're on the master/v12 branch, custom emojis reactions are keyed by their ID
     const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
     const reaction = message.reactions.get(emojiKey);
-
     bot.emit(events[event.t], reaction, user);
 });
-
 
 function testCommand(message) {
     if (message.author.id != testacc) {
@@ -282,7 +271,7 @@ async function accuse(emoji, reaction, user) {
         var chosenEvidence = []
         var accused = guild.channels.get(reaction.message.channel.id).name
         chosenEvidence.push(accused)
-        user.send(`you are accusing ${accused} of stealing the candy\nplease send the id of the room that you think they stole it from`).then(async function(room){
+        user.send(`you are accusing \`${accused}\` of stealing the candy\nplease send the id of the room that you think they stole it from\n\`you will have exactly 30 seconds to submit each of your answers\``).then(async function(room){
             var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
             var roomCheck = roomvalue.first().content
             while (roomids.includes(roomCheck.toLowerCase()) != true) { 
