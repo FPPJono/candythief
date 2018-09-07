@@ -277,18 +277,32 @@ async function accuse(emoji, reaction, user) {
         let member = guild.member(user)
         var rooms = ['Attic','Bedroom','Bathroom','Kitchen','Living Room','Basement']
         var roomids=['atc','bdr','btr','ktc','lvr','bsm']
+        var evidence = ['conversation between poot and cate','polaroid of nakpin']
+        var evids = ['pc_823','cm_192']
+        var chosenEvidence = []
         var accused = guild.channels.get(reaction.message.channel.id).name
+        chosenEvidence.push(accused)
         user.send(`you are accusing ${accused} of stealing the candy\nplease send the id of the room that you think they stole it from`).then(async function(room){
             var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
             var roomCheck = roomvalue.first().content
-            room.channel.send(roomCheck)
             while (roomids.includes(roomCheck.toLowerCase()) != true) { 
                 room.channel.send('`that is not a valid response, please input a valid room id`')
                 roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                 roomCheck = roomvalue.first().content
             }
-            var chosenRoom = rooms[roomids.indexOf(roomCheck.toLowerCase())]
-            room.channel.send(`you have chosen the \`${chosenRoom}\` as the room that the event took place`)
+            chosenEvidence.push(rooms[roomids.indexOf(roomCheck.toLowerCase())])
+            room.channel.send(`you have chosen the \`${chosenEvidence[1]}\` as the room that the event took place`)
+            user.send(`please present the id of your first piece of evidence`).then(async function(answer){
+                var answer1 = await answer.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                var ev1Check = answer1.first().content
+                while (evids.includes(ev1Check.toLowerCase()) != true) { 
+                    answer.channel.send('`that is not a valid response, please input a valid room id`')
+                    answer1 = await answer.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                    ev1Check = answer1.first().content
+                }
+                chosenEvidence.push(rooms[roomids.indexOf(roomCheck.toLowerCase())])
+                room.channel.send(`you have chosen:\`${chosenEvidence[2]}\` as your first piece of evidence`)
+            })
         })
     } else return
 }
