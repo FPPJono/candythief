@@ -321,7 +321,6 @@ async function accuse(emoji, reaction, user) {
                             ev3Check = answer3.first().content
                         }
                         chosenEvidence.push(evidence[evids.indexOf(ev3Check.toLowerCase())])
-                        room.channel.send(chosenEvidence)
                         room.channel.send(`you have chosen:\`${chosenEvidence[4]}\` as your third piece of evidence`)
                         if (chosenEvidence.includes("chris") != true) {
                             return room.channel.send("`you have gotten at least one thing incorrect`")
@@ -342,7 +341,6 @@ async function accuse(emoji, reaction, user) {
 }
 
 bot.on('messageReactionAdd', async (reaction, user) => {
-    console.log(reaction.emoji.name)
     findEvidence(attic, '486089032388837387', "🔍", reaction, user, "a tape recorder and a polaroid photo")
     //useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
     accuse("🔨", reaction, user)
