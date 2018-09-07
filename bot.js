@@ -278,13 +278,11 @@ async function accuse(emoji, reaction, user) {
         var rooms = ['attic','bedroom','bathroom','kitchen','living room','basement']
         user.send(`you are accusing ${guild.channels.get(reaction.message.channel.id).name} of stealing the candy\nplease send the room id that you think they stole it from`).then(async function(room){
             var roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
-            room.channel.send(`${rooms.includes(roomvalue.toString().toLowerCase())},${rooms.toString()},${roomvalue}`)
-            while (rooms.includes(roomvalue.toString().toLowerCase()) != true) { 
+            while (rooms.includes(roomvalue.content.toLowerCase()) != true) { 
                 room.channel.send('`that is not a valid response, please input the correct room id`')
                 roomvalue = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
-                room.channel.send(`${rooms.includes(roomvalue.toString().toLowerCase())}`)
             }
-            room.channel.send(`you have chosen the \`${roomvalue}\` as the room that the event took place`)
+            room.channel.send(`you have chosen the \`${roomvalue.content}\` as the room that the event took place`)
         })
     } else return
 }
