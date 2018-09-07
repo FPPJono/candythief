@@ -292,16 +292,27 @@ async function accuse(emoji, reaction, user) {
             }
             chosenEvidence.push(rooms[roomids.indexOf(roomCheck.toLowerCase())])
             room.channel.send(`you have chosen the \`${chosenEvidence[1]}\` as the room that the event took place`)
-            user.send(`please present the id of your first piece of evidence`).then(async function(answer){
-                var answer1 = await answer.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+            user.send(`please present the id of your first piece of evidence`).then(async function(){
+                var answer1 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                 var ev1Check = answer1.first().content
                 while (evids.includes(ev1Check.toLowerCase()) != true) { 
                     answer.channel.send('`that is not a valid response, please input a valid room id`')
-                    answer1 = await answer.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                    answer1 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
                     ev1Check = answer1.first().content
                 }
                 chosenEvidence.push(evidence[evids.indexOf(ev1Check.toLowerCase())])
                 room.channel.send(`you have chosen:\`${chosenEvidence[2]}\` as your first piece of evidence`)
+                room.channel.send(`please present the id of your second piece of evidence`).then(async function(){
+                    var answer2 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                    var ev2Check = answer2.first().content
+                    while (evids.includes(ev2Check.toLowerCase()) != true) { 
+                        room.channel.send('`that is not a valid response, please input a valid room id`')
+                        answer2 = await room.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                        ev2Check = answer2.first().content
+                    }
+                    chosenEvidence.push(evidence[evids.indexOf(ev1Check.toLowerCase())])
+                    room.channel.send(`you have chosen:\`${chosenEvidence[3]}\` as your second piece of evidence`)
+                })
             })
         })
     } else return
