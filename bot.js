@@ -138,7 +138,7 @@ bot.on('ready', () => {
     bot.user.setPresence({ game: { name: 'I turned on !!', type: 0 } }); //playing game
     wait(5000)
     bot.user.setPresence({ game: { name: 'your every move', type: 3 } });
-    bot.user.setUsername("Candy Detective");
+    bot.user.setUsername("Detective Vetomo");
 });
 
 bot.on("message", async message => {
@@ -217,7 +217,7 @@ bot.on('message', message => {
     }
     if (message.content.startsWith(PREFIX + "tools")) {
         let color = getRandomInt(16777215)
-        var embed = richEmbed(color, ["🔍", "❓", "<:inv:486093327662448650>", "🔨"], [`Looks through the room and adds anything that gets found to your evidence archive`,`Stuck? Call in Detective Spark to help pick up some extra clues (Can only be used twice)`,`think you can use some evidence you have to solve something? press this and then dm the evidence id to the bot, and if you can, you will!`,`think you've solved the mystery? go to the suspect profile for the person youre accusing and press this, then answer the questions sent by the bot and see if youre right!`], `Tools`)
+        var embed = richEmbed(color, ["🔍", "❓", "<:inv:486093327662448650>", "🔨"], [`Looks through the room and adds anything that gets found to your evidence archive`,`Stuck? Detective Vetomo will look around to help pick up some extra clues (Can only be used twice)`,`Think you can combine some of your evidence? press this and then dm the evidence id to Vetomo, and if you can, you will!`,`think you've solved the mystery? go to the profile for the person youre accusing and press this, then answer the questions sent by the bot and see if youre right!`], `Tools`)
         message.channel.send({ embed });
     }
 });
