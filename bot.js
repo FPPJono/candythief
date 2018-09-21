@@ -194,6 +194,20 @@ bot.on('message', message => {
         var embed = pfpEmbed(color, ["Display Name", "User ID", "Roles", "Top Role Colour", "Joined"], [`${message.guild.member(person).displayName}`,`${person.id}`,`${message.guild.member(person).roles.array().toString().substr(0, 1024)}`,`${message.guild.member(person).displayHexColor}`,`${message.guild.member(person).joinedAt.toUTCString()}`], `Info About ${person.username}`, `${person.avatarURL}`)
         message.channel.send({ embed });
     }
+    if (message.content.startsWith(PREFIX + "send")) {
+        if (message.author.id === '270017125815418901') {
+            const sayMessage = args.join(" ");
+            var useContent = sayMessage.substr(5);
+            var attachments = (message.attachments).array()
+            message.delete().catch(O_o => { })
+            if (message.attachments.array().length >= 1) {
+                message.channel.send(`${useContent}`)
+                attachments.forEach(function (attachment) { message.channel.send({ file: `${attachment.url}` }) })
+            }else if (message.attachments.array().length <= 0) { message.channel.send(`${useContent}`) }
+            message.channel.stopTyping()
+        } else
+            message.channel.send("non that only spark");
+    }
     if (rip.startsWith(PREFIX + "avatar")) {
         if (message.mentions.users.array().toString().length >= 1) {
             var pfp = message.mentions.users.first().avatarURL
@@ -218,6 +232,11 @@ bot.on('message', message => {
     if (message.content.startsWith(PREFIX + "tools")) {
         let color = getRandomInt(16777215)
         var embed = richEmbed(color, ["🔍", "❓", "<:inv:486093327662448650>", "🔨"], [`Looks through the room and adds anything that gets found to your evidence archive`,`Stuck? Detective Vetomo will look around to help pick up some extra clues (Can only be used twice)`,`Think you can combine some of your evidence? press this and then dm the evidence id to Vetomo, and if you can, you will!`,`think you've solved the mystery? go to the profile for the person youre accusing and press this, then answer the questions sent by the bot and see if youre right!`], `Tools`)
+        message.channel.send({ embed });
+    }
+    if (message.content.startsWith(PREFIX + "atc")) {
+        let color = getRandomInt(16777215)
+        var embed = richEmbed(color, ["Room ID","Summary of room"], ["atc","-object sitting on chair near back\n-broken drawers\n-camera on ground"], `Information on the attic`)
         message.channel.send({ embed });
     }
 });
