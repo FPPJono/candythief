@@ -66,11 +66,10 @@ function decimalToHexString(number) {
 async function scorecard(person, message, bot) {
     if ((person.displayAvatarURL.includes("png"))||(person.displayAvatarURL.includes("jpg"))||(person.displayAvatarURL.includes("jpeg"))){
         await download.image({url: person.displayAvatarURL, dest:`pfp.png`})
-        message.channel.send({files:[{attachment: "pfp.png"}]})
+        message.channel.send("aa")
     }else if(person.displayAvatarURL.includes("gif")){
         await gifFrames({url:person.displayAvatarURL, frames:0, outputType: 'png'}).then(function(frameData){
             frameData[0].getImage().pipe(fs.createWriteStream(`pfp.png`))
-            message.channel.send({files:[{attachment: "pfp.png"}]})
         })
     }
     var size = (600 / person.username.length)
