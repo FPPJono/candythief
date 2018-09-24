@@ -71,6 +71,7 @@ async function scorecard(person, message, bot) {
             frameData[0].getImage().pipe(fs.createWriteStream(`pfp.png`))
         })
     }
+    message.channel.send({files:[{attachment: "pfp.png"}]})
     var size = (600 / person.username.length)
     if (size > 50){
         size = 50
