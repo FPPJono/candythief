@@ -1,6 +1,6 @@
 {
-  "name": "posty",
-  "description": "a bot for post malone server thing I guess",
+  "name": "vetomo",
+  "description": "candy thief hunt bot",
   "version": "0.0.0",
   "main": "bot.js",
   "scripts": {
@@ -17,11 +17,6 @@
     "tmp": "0.0.33",
     "image-downloader": "3.4.0",
     "async": "2.6.1",
-    "gif-frames": "0.4.0",
-    "sheetsu-node": "0.0.7",
-    "sheetsu": "1.2.0",
-    "gif-creation-service": "0.0.2",
-    "jimp": "0.2.28",
-    "image-size": "0.6.3"
+    "gif-frames": "0.4.0"
   }
 }
