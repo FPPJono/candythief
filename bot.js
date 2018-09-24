@@ -9,10 +9,6 @@ const async = require("async")
 var gifFrames = require('gif-frames')
 var gameMessage = new Function('return true')
 const download = require('image-downloader')
-const sheetsu = require('sheetsu-node')
-const GifCreationService = require('gif-creation-service')
-const Jimp = require('jimp')
-const sizeOf = require('image-size')
 
 var PImage = require('pureimage');
 var img1 = PImage.make(500,500);
