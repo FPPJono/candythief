@@ -77,7 +77,7 @@ async function scorecard(person, message, bot) {
     if (size > 50){
         size = 50
     }
-    PImage.decodePNGFromStream(fs.createReadStream(`winCard.png`)).then((img) => {
+    /*PImage.decodePNGFromStream(fs.createReadStream(`winCard.png`)).then((img) => {
         var img2 = PImage.make(750,500);
         var c = img2.getContext('2d');
         c.drawImage(img,
@@ -105,7 +105,7 @@ async function scorecard(person, message, bot) {
                 });
             })
         });
-    });
+    });*/
 }
 
 const events = {
