@@ -276,7 +276,7 @@ async function accuse(emoji, reaction, user) {
                             return room.channel.send("`you have gotten at least one thing incorrect`")
                         }else {
                             var userTime = (answer3.first().createdTimestamp - bot.guilds.get('484293337323667467').member(answer3.first().author).joinedTimestamp).toString().slice(0,-3)
-                            bot.guilds.get('484293337323667467').channels.get('485205101913571329').send(`<@${answer3.first().author.id}> has won! their time was: ${userTime} seconds`, { files: [{ attachment: ev3Check.author.avatarURL(), name: `${userTime} ${answer3.first().author.id}${answer3.first().author.avatarURL().slice(0, -10).substr(answer3.first().author.avatarURL().slice(0, -10).length - 4)}` }]})
+                            bot.guilds.get('484293337323667467').channels.get('485205101913571329').send(`<@${user.id}> has won! their time was: ${userTime} seconds`, { files: [{ attachment: user.avatarURL(), name: `${userTime} ${user.id}${user.avatarURL().slice(0, -10).substr(user.avatarURL().slice(0, -10).length - 4)}` }]})
                             answer3.first().author.send("you won teehee")
                         }
                     })
