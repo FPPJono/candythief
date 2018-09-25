@@ -87,19 +87,6 @@ bot.on('ready', () => {
     bot.user.setUsername("Detective Vetomo");
 });
 
-bot.on("message", async message => {
-    var sender = message.author;
-    if (message.author.bot) return;
-    const args = message.content.split(" ");
-    let rip = message.content.toLowerCase()
-    let guild = message.guild
-    var attachedfiles = (message.attachments).array()
-    if (rip.startsWith('!wintest')) { 
-        message.channel.send({files:[{attachment: 'bot.js', name:'test.js'}] })
-        await scorecard(message.author, message, bot)
-    }
-})
-
 bot.on('message', message => {
     var sender = message.author;
     if (message.author.bot) return;
