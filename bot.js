@@ -321,7 +321,7 @@ async function useEvidence(reaction, channel, user){
         } else{
             user.send('you can not use any evidence here')
         }
-    }
+    })
 }
 
 bot.on('messageReactionAdd', async (reaction, user) => {
