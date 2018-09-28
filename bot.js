@@ -182,6 +182,13 @@ bot.on('message', message => {
              m.react(inv)
          ))
      }
+     if (message.content.startsWith(PREFIX + "cm192")) {
+         let color = getRandomInt(16777215)
+         var embed = richEmbed(color, ["Found In", "Evidence ID", "Suspects Present", "Hidden Data", "Information"], [`<#484294432204521472>`,`cm_192`,`<#484532310881075201>`,`None`,`Image of Nakpin found in the attic, confirming that they were in the attic at the time of the crime`], `Info About The Evidence Above`)
+         message.channel.send({ embed }).then(m => (
+             m.react(inv)
+         ))
+     }
 });
 
 function findEvidence(channel, roleid, emoji, reaction, user, found) {
