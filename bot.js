@@ -300,15 +300,32 @@ function findEvidence(channel, roleid, emoji, reaction, user, found) {
             })
         }
     } else return
-}
+}*/
 
 async function evidenceCheck(channel, roleid, reaction, user, message, evidenceid) {
     
-}*/
+}
+
+async function useEvidence(reaction, channel, user){
+    if (user.bot) return
+    let guild = reaction.message.guild
+    let member = guild.member(user)
+    user.send('please send the evidence id that you would like to try use on this.\nyou have 30 seconds to respond').then(async function(newmsg){
+        var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+        var answer = input.first().content.toLowerCase()
+        if (reaction.channel.id === bm428){
+            user.send('I like sex')
+        } else{
+            user.send('you can not use any evidence here')
+        }
+}
 
 bot.on('messageReactionAdd', async (reaction, user) => {
     findEvidence(attic, '486089032388837387', "🔍", reaction, user, "a tape recorder and a polaroid photo")
     useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
+    if (reaction.emoji.name === "inv"){
+        useEvidence(reaction, reaction.message.channel, user)
+    }
     accuse("🔨", reaction, user)
 });
 
