@@ -316,7 +316,7 @@ async function useEvidence(reaction, channel, user){
     user.send('please send the evidence id that you would like to try use on this.\nyou have 30 seconds to respond').then(async function(newmsg){
         var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
         var answer = input.first().content.toLowerCase()
-        if (reaction.channel.id === bm428){
+        if (reaction.message.channel.id === bm428){
             user.send('I like sex')
         } else{
             user.send('you can not use any evidence here')
