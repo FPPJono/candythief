@@ -21,6 +21,25 @@ var basement = '484293337323667469'
 
 //evidence
 var bm428 = '487726829583466497'
+var enf = '495362866510168084'
+
+//suspects
+var misfit = '484532103233536022'
+var nakpin = '484532310881075201'
+var ommie = '484532332078825492'
+var poot = '484532378572816394'
+var vee = '484532403826589697'
+var dilemma = '484532445325033504'
+var aqua = '484532482411069463'
+var runaway = '484532515307126789'
+var cate = '484532686032076802'
+var x2 = '484532739169845248'
+var taxxi = '484532774661914637'
+var yersh = '484532786183667725'
+var chris = '484532846669594625'
+var tree = '484532857520390144'
+var spooky = '484532871495942149'
+var vipie = '484532924679585799'
 
 //
 var testrole = '486096707054993439'
@@ -288,32 +307,13 @@ function findEvidence(channel, roleid, emoji, reaction, user, found) {
     }
 }
 
-/*async function useEvidence(channel, roleid, emoji, reaction, user, message, evidenceid) {
-    if (reaction.emoji.name === emoji) {
-        if (user.bot) return
-        let guild = reaction.message.guild
-        let member = guild.member(user)
-        if (reaction.message.channel != bot.channels.get(channel)) return
-        if (member.roles.has(roleid)) {
-            return
-        }else {
-            user.send('please send the evidence id that you would like to try use on this.\nyou have 30 seconds to respond').then(async function(newmsg){
-                var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
-                if (input.first().content.toLowerCase() === evidenceid) {
-                    newmsg.channel.send(`you have unlocked: \`${message}\``)
-                    member.addRole(roleid)
-                }else newmsg.channel.send('you cannot use that on this')
-            })
-        }
-    } else return
-}*/
-
 async function evidenceCheck(member, answer,correctanswer, object, role){
+    if (member.roles.has(role)) return member.user.send('`you have already used all possible evidence on this item.`')
     if (answer === correctanswer) {
         member.user.send(`\`you have unlocked ${object}\``)
         member.addRole(role)
     }else{
-        member.user.send("no")
+        member.user.send("`this is not the correct evidence item to use.`")
     }
 }
 
@@ -324,7 +324,11 @@ async function useEvidence(reaction, channel, user, guild, member){
         var answer = input.first().content.toLowerCase()
         if (channel.id === bm428){
             evidenceCheck(member,answer,"cm_192","taco",testrole)
-        } else{
+        }else if (channel.id === aqua){
+            evidenceCheck(member,answer,"dp_475","knowledge about the attic note and disney pen",enf)
+        } else if (channel.id === runaway) {
+            user.send('sex')
+        }else{
             user.send('`you can not use any evidence on this.`')
         }
     })
