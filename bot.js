@@ -22,6 +22,9 @@ var basement = '484293337323667469'
 //evidence
 var bm428 = '487726829583466497'
 
+//
+var testrole = '486096707054993439'
+
 //me
 const testacc = '270017125815418901'
 
@@ -305,6 +308,14 @@ function findEvidence(channel, roleid, emoji, reaction, user, found) {
     } else return
 }*/
 
+async function evidenceCheck(member, answer,correctanswer, object, role){
+    if (answer === correctanswer) {
+        member.user.send(`\`you have unlocked ${object}\``)
+        member.addRole(role)
+    }else{
+        member.user.send("no")
+    }
+}
 
 async function useEvidence(reaction, channel, user, guild, member){
     if (user.bot) return
@@ -312,7 +323,7 @@ async function useEvidence(reaction, channel, user, guild, member){
         var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
         var answer = input.first().content.toLowerCase()
         if (channel.id === bm428){
-            user.send('I like sex')
+            evidenceCheck(member,answer,"cm_192","taco",testrole)
         } else{
             user.send('`you can not use any evidence on this.`')
         }
@@ -323,7 +334,6 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     let guild = reaction.message.guild
     let member = guild.member(user)
     findEvidence(attic, '486089032388837387', "🔍", reaction, user, "a tape recorder and a polaroid photo")
-    useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
     if (reaction.emoji.name === "inv"){
         useEvidence(reaction, reaction.message.channel, user, guild, member)
     }
