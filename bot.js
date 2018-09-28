@@ -9,6 +9,8 @@ var gameMessage = new Function('return true')
 
 //Bot Code
 
+var inv = '486093327662448650'
+
 //rooms
 var attic = '484294432204521472'
 var bedroom = '484294343021297677'
@@ -173,6 +175,13 @@ bot.on('message', message => {
         var embed = richEmbed(color, ["Room ID","Summary of room"], ["atc","-object sitting on chair near back\n-broken drawers\n-camera on ground"], `Information on the attic`)
         message.channel.send({ embed });
     }
+     if (message.content.startsWith(PREFIX + "pc823")) {
+         let color = getRandomInt(16777215)
+         var embed = richEmbed(color, ["Found In", "Evidence ID", "Suspects Present", "Hidden Data", "Information"], [`<#484294432204521472>`,`pc_823`,`<#484532378572816394>, <#484532686032076802>`,`Conversation audio`,`Audio tape of a conversation between poot and cate, conversation is below`], `Info About The Evidence Above`)
+         message.channel.send({ embed }).then(m => (
+             m.react(inv)
+         ))
+     }
 });
 
 function findEvidence(channel, roleid, emoji, reaction, user, found) {
