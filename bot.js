@@ -191,43 +191,6 @@ bot.on('message', message => {
      }
 });
 
-function findEvidence(channel, roleid, emoji, reaction, user, found) {
-    if (reaction.emoji.name === emoji) {
-        if (user.bot) return;
-        let guild = reaction.message.guild;
-        let member = guild.member(user);
-        if (reaction.message.channel != bot.channels.get(channel)) {
-            return;
-        }
-        if (member.roles.has(roleid)) {
-            return
-        } else {
-            user.send(`You have found: \`${found}\``)
-            member.addRole(roleid)
-        }
-    }
-}
-
-async function useEvidence(channel, roleid, emoji, reaction, user, message, evidenceid) {
-    if (reaction.emoji.name === emoji) {
-        if (user.bot) return
-        let guild = reaction.message.guild
-        let member = guild.member(user)
-        if (reaction.message.channel != bot.channels.get(channel)) return
-        if (member.roles.has(roleid)) {
-            return
-        }else {
-            user.send('please send the evidence id that you would like to try use on this.\nyou have 30 seconds to respond').then(async function(newmsg){
-                var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
-                if (input.first().content.toLowerCase() === evidenceid) {
-                    newmsg.channel.send(`you have unlocked: \`${message}\``)
-                    member.addRole(roleid)
-                }else newmsg.channel.send('you cannot use that on this')
-            })
-        }
-    } else return
-}
-
 async function accuse(emoji, reaction, user) {
     if (reaction.emoji.name === emoji) {
         if (user.bot) return
@@ -302,9 +265,50 @@ async function accuse(emoji, reaction, user) {
     } else return
 }
 
+function findEvidence(channel, roleid, emoji, reaction, user, found) {
+    if (reaction.emoji.name === emoji) {
+        if (user.bot) return;
+        let guild = reaction.message.guild;
+        let member = guild.member(user);
+        if (reaction.message.channel != bot.channels.get(channel)) {
+            return;
+        }
+        if (member.roles.has(roleid)) {
+            return
+        } else {
+            user.send(`You have found: \`${found}\``)
+            member.addRole(roleid)
+        }
+    }
+}
+
+/*async function useEvidence(channel, roleid, emoji, reaction, user, message, evidenceid) {
+    if (reaction.emoji.name === emoji) {
+        if (user.bot) return
+        let guild = reaction.message.guild
+        let member = guild.member(user)
+        if (reaction.message.channel != bot.channels.get(channel)) return
+        if (member.roles.has(roleid)) {
+            return
+        }else {
+            user.send('please send the evidence id that you would like to try use on this.\nyou have 30 seconds to respond').then(async function(newmsg){
+                var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+                if (input.first().content.toLowerCase() === evidenceid) {
+                    newmsg.channel.send(`you have unlocked: \`${message}\``)
+                    member.addRole(roleid)
+                }else newmsg.channel.send('you cannot use that on this')
+            })
+        }
+    } else return
+}
+
+async function evidenceCheck(channel, roleid, reaction, user, message, evidenceid) {
+    
+}*/
+
 bot.on('messageReactionAdd', async (reaction, user) => {
     findEvidence(attic, '486089032388837387', "🔍", reaction, user, "a tape recorder and a polaroid photo")
-    //useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
+    useEvidence('485285840088727552', '486096707054993439', "inv", reaction, user, "sex", "cm_192")
     accuse("🔨", reaction, user)
 });
 
