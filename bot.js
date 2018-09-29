@@ -320,15 +320,16 @@ async function evidenceCheck(member, answer,correctanswer, object, role){
 async function useEvidence(reaction, channel, user, guild, member){
     if (user.bot) return
     user.send('please send the evidence id that you would like to try use on this.\nyou have 30 seconds to respond').then(async function(newmsg){
+        var input = "yee"
         var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
-        if (input.first().exists() != true) return newmsg.channel.send('`request cancelled, too much time taken`')
+        if (input === "yee") return newmsg.channel.send('`request cancelled, too much time taken`')
         var answer = input.first().content.toLowerCase()
         if (channel.id === bm428){
             evidenceCheck(member,answer,"cm_192","taco",testrole)
         }else if (channel.id === aqua){
             evidenceCheck(member,answer,"dp_475","knowledge about the attic note and disney pen",enf)
         } else if (channel.id === runaway) {
-            user.send('sex')
+            user.send('test')
         }else{
             user.send('`you can not use any evidence on this.`')
         }
