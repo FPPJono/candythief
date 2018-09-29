@@ -321,6 +321,7 @@ async function useEvidence(reaction, channel, user, guild, member){
     if (user.bot) return
     user.send('please send the evidence id that you would like to try use on this.\nyou have 30 seconds to respond').then(async function(newmsg){
         var input = await newmsg.channel.awaitMessages(response => response.author.id === user.id, {max:1, time:30000, errors:['time']})
+        if (input.isEmpty() === true) return newmsg.channel.send('`time ran out, you must enter a response`')
         var answer = input.first().content.toLowerCase()
         if (channel.id === bm428){
             evidenceCheck(member,answer,"cm_192","taco",testrole)
