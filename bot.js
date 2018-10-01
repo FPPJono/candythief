@@ -167,7 +167,7 @@ bot.on('message', message => {
             }else if (message.attachments.array().length <= 0) { message.channel.send(`${useContent}`) }
             message.channel.stopTyping()
         } else
-            message.channel.send("non that only spark");
+            message.channel.send("non that only for spark");
     }
     if (rip.startsWith(PREFIX + "avatar")) {
         if (message.mentions.users.array().toString().length >= 1) {
@@ -214,6 +214,9 @@ bot.on('message', message => {
              m.react(inv)
          ))
      }
+    if (message.content.startsWith(PREFIX + "test")) {
+        message.channel.send({ files: [{ attachment: 'https://lh4.googleusercontent.com/44wxpwkS22sirthnY3z8q_-ked-86QV6wZvHdg3gWGKQqpf5a232b9QKD56TL1KMiN9GgJWk4GdIoNsA8ZW_=w1255-h618', name: `file.gif` }]})
+    }
 });
 
 async function accuse(emoji, reaction, user) {
