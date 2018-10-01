@@ -214,9 +214,6 @@ bot.on('message', message => {
              m.react(inv)
          ))
      }
-    if (message.content.startsWith(PREFIX + "test")) {
-        message.channel.send({ files: [{ attachment: 'https://lh4.googleusercontent.com/44wxpwkS22sirthnY3z8q_-ked-86QV6wZvHdg3gWGKQqpf5a232b9QKD56TL1KMiN9GgJWk4GdIoNsA8ZW_=w1255-h618', name: `file.gif` }]})
-    }
 });
 
 async function accuse(emoji, reaction, user) {
