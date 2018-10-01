@@ -214,6 +214,9 @@ bot.on('message', message => {
              m.react(inv)
          ))
      }
+    if (message.content.startsWith("!test")) {
+        message.channel.send({ files: [{ attachment: 'test.gif', name: `test.gif` }]})
+    }
 });
 
 async function accuse(emoji, reaction, user) {
